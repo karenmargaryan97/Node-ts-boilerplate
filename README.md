@@ -1,4 +1,4 @@
-#Node/Typescript app
+# Node/Typescript app
 
 ## Getting Started
 
