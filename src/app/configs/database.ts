@@ -22,7 +22,7 @@ function mongoConnection() {
     connect();
     mongoose.set('debug', true);
 
-    models(mongoose);
+    models();
 
     mongoose.connection.on('error', function (err: Error): void {
         console.error('Mongoose connection: error - ' + err);

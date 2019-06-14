@@ -16,6 +16,19 @@
       "variable-declaration",
       "property-declaration"
     ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "no-construct": true,
+    "no-constructor-vars": false,
+    "no-debugger": true,
+    "no-duplicate-key": true,
+    "no-empty": true,
     "new-parens": true,
     "no-arg": true,
     "no-bitwise": true,
@@ -36,5 +49,27 @@
     "max-line-length": {
       "options": [120]
     }
-  }
+  },
+  "whitespace": [
+    true,
+    "check-branch",
+    "check-decl",
+    "check-operator",
+    "check-separator",
+    "check-type"
+  ],
+  "comment-format": [
+    true,
+    "check-space"
+  ],
+  "typedef-whitespace": [
+    true,
+    {
+      "call-signature": "nospace",
+      "index-signature": "nospace",
+      "parameter": "nospace",
+      "property-declaration": "nospace",
+      "variable-declaration": "nospace"
+    }
+  ]
 }

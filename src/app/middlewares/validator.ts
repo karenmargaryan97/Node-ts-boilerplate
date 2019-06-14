@@ -1,14 +1,16 @@
 import { ServiceUnavailable, ValidationError } from '../errors';
 import { Request, Response, NextFunction } from "express";
+import  * as ExpressValidator from 'express-validator/check';
 
-export default (schema: object = null): any => {
+export default (schema: any = null): any => {
 
-    return async (req: any, res: Response, next: NextFunction): Promise<any> => {
+    return async (req: Request, res: Response, next: NextFunction): Promise<any> => {
         if (schema) {
             req.check(schema);
         }
 
-        let result;
+        let result: ExpressValidator.Result;
+
         try {
             result = await req.getValidationResult();
         } catch (error) {

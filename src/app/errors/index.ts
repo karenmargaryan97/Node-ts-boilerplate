@@ -21,7 +21,7 @@ export class AuthError extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -33,7 +33,7 @@ export class BadRequest extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -45,7 +45,7 @@ export class UnsupportedMediaType extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -57,7 +57,7 @@ export class Conflict extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -69,7 +69,7 @@ export class NotFound extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -81,7 +81,7 @@ export class Forbidden extends Error {
     message: string = PERMISSION_DENIED;
     errors: Array<any>;
 
-    constructor(errors = null) {
+    constructor(errors: any = null) {
         super();
         this.errors = errors;
     }
@@ -92,7 +92,7 @@ export class Gone extends Error {
     message: string;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
         this.message = message;
         this.errors = errors;
@@ -104,7 +104,7 @@ export class ValidationError extends Error {
     message: string = VALIDATION_ERROR;
     errors: Array<any>;
 
-    constructor(errors) {
+    constructor(errors: any) {
         super();
         this.errors = errors;
     }
@@ -115,7 +115,7 @@ export class ExternalApiError extends Error {
     message: string = SERVICE_UNAVAILABLE;
     errors: Array<any>;
 
-    constructor(errors) {
+    constructor(errors: any) {
         super();
         this.errors = errors;
     }
@@ -126,7 +126,7 @@ export class ServiceUnavailable extends Error {
     message: string = SOMETHING_WENT_WRONG;
     errors: Array<any>;
 
-    constructor(message, errors = null) {
+    constructor(message: string, errors: any = null) {
         super();
 
         if (errors) {

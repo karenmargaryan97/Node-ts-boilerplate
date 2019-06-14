@@ -1,18 +1,21 @@
+import { IUser } from '../../interfaces/user';
+
 import * as mongoose from 'mongoose';
-const User = mongoose.model('User');
+const User: Model<IUser> = mongoose.model('User');
+
 import { NOT_EXISTS } from '../configs/constants';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { AuthError } from '../errors';
-import { IUser } from '../../interfaces/user';
+import { Model } from 'mongoose';
 
 export default (secret: string, passport: any) => {
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
     passport.deserializeUser(async (id, done) => {
-        let user = await User.query().findById(id)
-            .first();
-        user ? done(null, user) : done(new AuthError(NOT_EXISTS), null);
+        let user: IUser = await User.findById(id);
+
+        user ? done(null, user) : done(new AuthError(NOT_EXISTS('User')), null);
     });
 
     let jwtOptions = {
@@ -26,7 +29,7 @@ export default (secret: string, passport: any) => {
         if (user) {
             next(null, user);
         } else {
-            next(new AuthError(NOT_EXISTS), false);
+            next(new AuthError(NOT_EXISTS('User')), false);
         }
     });
     passport.use('user-rule', strategy);

@@ -1,4 +1,4 @@
-const limiter: object = {
+const limiter: any = {
     development: {
         windowsMs: 15 * 60 * 1000, // 15 minutes
         max: 2500,

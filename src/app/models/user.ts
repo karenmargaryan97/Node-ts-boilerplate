@@ -1,15 +1,17 @@
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
+import { model, Schema } from 'mongoose';
+import { IUser } from '../../interfaces/user';
 
-export default (mongoose) => {
-    let UserSchema = mongoose.Schema({
-            fullName: { type: String, required: true },
-            email: { type: String, lowercase: true, required: true, index: true },
-            password: { type: String },
-            createdAt: Date,
-            updatedAt: Date
-        });
+export default () => {
+    let UserSchema: Schema = new Schema({
+        fullName: { type: String, required: true },
+        email: { type: String, lowercase: true, required: true, index: true },
+        password: { type: String },
+        createdAt: Date,
+        updatedAt: Date
+    });
 
-    UserSchema.pre('save', function(next) {
+    UserSchema.pre<IUser>('save', function(next) {
         const now: Date = new Date();
 
         this.updatedAt = now;
@@ -35,5 +37,5 @@ export default (mongoose) => {
         },
     };
 
-    return mongoose.model('User', UserSchema);
+    return model<IUser>('User', UserSchema);
 };

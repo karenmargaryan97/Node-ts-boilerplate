@@ -5,18 +5,18 @@ import { BadRequest } from '../../errors';
 import Utils from '../../helpers/utils';
 import { INVALID_EMAIL_OR_PASSWORD } from '../../configs/constants';
 import { IJWTPayload } from '../../../interfaces/globals';
-import {IUser} from "../../../interfaces/user";
+import { IUser } from '../../../interfaces/user';
 
 export class AuthController {
 
     static async login(req: Request, res: Response, next: NextFunction) {
-        let { email, password } = req.body;
+        let payload: IUser = req.body;
 
         try {
-            email = email.toLowerCase();
-            let user: any = await UserService.getByEmail(email);
+            payload.email = payload.email.toLowerCase();
+            let user: IUser = await UserService.getByEmail(payload.email);
 
-            if (user === null || !user.comparePassword(password)) {
+            if (user === null || !user.comparePassword(payload.password)) {
                 throw new BadRequest(INVALID_EMAIL_OR_PASSWORD);
             }
 
@@ -36,7 +36,7 @@ export class AuthController {
         }
     }
 
-    static async signup(req: Request, res: Response, next: NextFunction) {
+    static async register(req: Request, res: Response, next: NextFunction) {
         const payload: IUser = req.body;
         try {
             const user: IUser = await UserService.create(payload);
@@ -52,7 +52,18 @@ export class AuthController {
                         email: user.email
                     }
                 });
+        } catch (e) {
+            next(e);
+        }
+    }
 
+    static async logout(req: Request, res: Response, next: NextFunction) {
+        try {
+            req.logout();
+
+            return res.status(SUCCESS_CODE).json({
+                success: true
+            });
         } catch (e) {
             next(e);
         }

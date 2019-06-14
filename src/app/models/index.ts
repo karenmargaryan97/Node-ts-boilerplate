@@ -1,5 +1,5 @@
 import User from './user';
 
-export default function initModels(mongoose): void {
-    User(mongoose);
+export default function initModels(): void {
+    User();
 }

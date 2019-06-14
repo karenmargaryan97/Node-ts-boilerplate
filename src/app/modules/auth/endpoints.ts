@@ -5,5 +5,6 @@ import { Router } from  'express';
 
 export default (router: Router): void => {
     router.post('/login', ...middlewares(schemas, 'login'), AuthController.login);
-    router.post('/signup', ...middlewares(schemas, 'signup'), AuthController.signup);
+    router.post('/register', ...middlewares(schemas, 'register'), AuthController.register);
+    router.get('/logout', ...middlewares(schemas, 'auth'), AuthController.logout);
 };

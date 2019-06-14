@@ -14,7 +14,7 @@ export default class Utils {
         return { token };
     }
 
-    static verifyJWTToken(token: string, secret: string = params.tokenSecret): object {
+    static verifyJWTToken(token: string, secret: string = params.tokenSecret): any {
         try {
             return jwt.verify(token, secret);
         } catch (e) {
@@ -22,7 +22,7 @@ export default class Utils {
         }
     }
 
-    static getObjectIds(query: string) {
+    static getObjectIds(query: string): Array<ObjectID> {
         const objectIds: string[] = query.split(',');
 
         return objectIds.map((fundId: string) => {

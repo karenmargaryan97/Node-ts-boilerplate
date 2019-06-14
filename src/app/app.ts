@@ -6,6 +6,7 @@ import * as RateLimit from 'express-rate-limit';
 import { json, urlencoded } from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
+import * as expressValidator from 'express-validator';
 
 import corsOptions from './configs/cors';
 import configPassport from './strategies/passport-jwt';
@@ -39,7 +40,7 @@ class Application {
         }
 
         this.app.use(cors(corsOptions))
-            // .use(expressValidator())
+            .use(expressValidator())
             .use(json())
             .use(urlencoded({ extended: true }))
             .use(cookieParser())

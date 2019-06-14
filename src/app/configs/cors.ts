@@ -1,6 +1,6 @@
 import params from './params';
 
-const corsOptions: object = {
+const corsOptions: any = {
     development: {
         origin: /localhost:3000/,
         credentials: true,

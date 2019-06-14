@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Document, Schema } from 'mongoose';
 
-export interface IUser {
-    _id: mongoose.Schema.Types.ObjectId;
+export interface IUser extends Document {
+    _id: Schema.Types.ObjectId;
     id?: string;
     fullName: string;
     email: string;
@@ -9,4 +9,5 @@ export interface IUser {
     createdAt: Date;
     updatedAt: Date;
     generatePassword(pw: string);
+    comparePassword(pw: string);
 }

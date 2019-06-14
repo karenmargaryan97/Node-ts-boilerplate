@@ -5,7 +5,7 @@ import {
     tokenSecret
 } from '../helpers/config';
 
-const params: object = {
+const params: any = {
     development: {
         apiUrl,
         appUrl,

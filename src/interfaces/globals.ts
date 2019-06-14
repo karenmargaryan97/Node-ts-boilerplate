@@ -1,11 +1,13 @@
+import { Schema } from 'mongoose';
+
 export interface Error {
     status?: number;
     message?: string;
-    errors?: Array<object>;
+    errors?: Array<any>;
 }
 
 export interface IJWTSignPayload {
-    id: string;
+    id: Schema.Types.ObjectId;
     created_at: string;
 }
 

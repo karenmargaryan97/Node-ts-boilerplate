@@ -1,6 +1,7 @@
-import * as mongoose from 'mongoose';
-import {IUser} from "../../interfaces/user";
-const User = mongoose.model('User');
+import { IUser } from "../../interfaces/user";
+
+import { Model, model } from "mongoose";
+const User: Model<IUser> = model('User');
 
 export class UserService {
     constructor() { }
@@ -11,6 +12,7 @@ export class UserService {
 
     static async create(user: IUser) : Promise<IUser> {
         const newUser: IUser = new User(user);
+
         newUser.password = newUser.generatePassword(user.password);
 
         return await User.create(newUser);
