@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import authEndpoints from './endpoints';
+import taskEndpoints from './endpoints';
 
-export default class AuthModule {
-    apiRouter: Router;
-    router: Router;
+export default class TaskModule {
+    apiRouter;
+    router;
 
-    constructor(apiRouter: Router) {
+    constructor(apiRouter) {
         this.apiRouter = apiRouter;
         this.router = Router();
     }
@@ -16,10 +16,10 @@ export default class AuthModule {
     }
 
     assignRouter() {
-        this.apiRouter.use('/auth', this.router);
+        this.apiRouter.use('/tasks', this.router);
     }
 
     assignEndpoints() {
-        authEndpoints(this.router);
+        taskEndpoints(this.router);
     }
 }

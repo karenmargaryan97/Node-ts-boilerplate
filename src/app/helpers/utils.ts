@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import params from '../configs/params';
 import { ObjectID } from 'bson';
 import { IJWTSignPayload, IJWTPayload } from '../../interfaces/globals';
-import { IUser } from '../../interfaces/user';
+import { IUser } from '../../interfaces/models';
 
 export default class Utils {
     static signJWTToken(user: IUser): IJWTPayload {

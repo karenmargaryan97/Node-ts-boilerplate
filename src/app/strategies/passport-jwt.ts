@@ -1,4 +1,4 @@
-import { IUser } from '../../interfaces/user';
+import { IUser } from '../../interfaces/models';
 
 import * as mongoose from 'mongoose';
 const User: Model<IUser> = mongoose.model('User');

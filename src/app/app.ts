@@ -14,9 +14,10 @@ import errorHandler from './middlewares/errorHandler';
 import params from './configs/params';
 import limiter from './configs/limiter';
 import enableModules from './modules';
-
+import { isValidDate } from './validators';
 
 class Application {
+    private limiter: express.RequestHandler;
     public app: express.Application;
     public router: express.Router;
 
@@ -26,6 +27,7 @@ class Application {
     }
 
     private initApp(): void {
+        this.createLimiter();
         this.configApp();
         this.configPassport();
         this.setParams();
@@ -40,11 +42,15 @@ class Application {
         }
 
         this.app.use(cors(corsOptions))
-            .use(expressValidator())
-            .use(json())
-            .use(urlencoded({ extended: true }))
+            .use(expressValidator({
+                customValidators: {
+                    isValidDate: isValidDate
+                }
+            }))
+            .use(json({ limit: 52428800 }))
+            .use(urlencoded({ extended: true, parameterLimit: 52428800, limit: 52428800 }))
             .use(cookieParser())
-            .use(Application.createLimiter())
+            .use(this.limiter)
             .use(helmet());
     }
 
@@ -54,8 +60,8 @@ class Application {
             .use(passport.session());
     }
 
-    private static createLimiter(): any {
-        return new RateLimit(limiter);
+    private createLimiter(): void {
+        this.limiter = new RateLimit(limiter);
     }
 
     private setParams(): void {

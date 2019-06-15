@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start:dev": "NODE_ENV=development nodemon"
   },
   "keywords": [],
@@ -33,7 +33,7 @@
     "watch": [
       "src"
     ],
-    "ext": "js",
+    "ext": "ts",
     "ignore": [
       "node_modules"
     ],
