@@ -1,3 +1,3 @@
-import * as passport from 'passport';
+import { authenticate } from 'passport';
 
-export default (rule: string): any => passport.authenticate(rule, { session: false });
+export default (rule: string): any => authenticate(rule, { session: false });

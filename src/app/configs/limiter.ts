@@ -1,18 +1,18 @@
 const limiter: any = {
     development: {
-        windowsMs: 15 * 60 * 1000, // 15 minutes
+        delayMs: 0,
         max: 2500,
-        delayMs: 0
+        windowsMs: 15 * 60 * 1000 // 15 minutes
     },
     production: {
-        windowsMs: 15 * 60 * 1000, // 15 minutes
+        delayMs: 0,
         max: 100,
-        delayMs: 0
+        windowsMs: 15 * 60 * 1000 // 15 minutes
     },
     test: {
-        windowsMs: 15 * 60 * 1000, // 15 minutes
+        delayMs: 0,
         max: 100,
-        delayMs: 0
+        windowsMs: 15 * 60 * 1000 // 15 minutes
     }
 };
 export default limiter[process.env.NODE_ENV || 'development'];

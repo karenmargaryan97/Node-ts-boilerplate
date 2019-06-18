@@ -1,15 +1,16 @@
+import { Router } from 'express';
 import AuthModule from './auth';
 import TaskModule from './task';
 
-export default (router) => {
+export default (router: Router): void => {
 
-    const auth = new AuthModule(router);
-    const task = new TaskModule(router);
+    const auth: AuthModule = new AuthModule(router);
+    const task: TaskModule = new TaskModule(router);
 
-    const modules = [
+    const modules: any = [
         auth,
         task
     ];
 
-    modules.forEach((module) => module.createEndpoints());
+    modules.forEach((module: any) => module.createEndpoints());
 };

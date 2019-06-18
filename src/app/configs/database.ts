@@ -1,62 +1,59 @@
+import * as mongoose from 'mongoose';
 import {
     mongoUri
 } from '../helpers/config';
 import models from '../models';
-import * as mongoose from 'mongoose';
 
-function mongoConnection() {
-    function connect() {
+(async (): Promise<mongoose.Mongoose> => {
+    (async (): Promise<mongoose.Mongoose> => {
         const timeout: number = 30 * 1000;
         const options: object = {
             connectTimeoutMS: timeout,
             keepAlive: timeout,
-            reconnectTries: Number.MAX_VALUE,
             reconnectInterval: 500,
+            reconnectTries: Number.MAX_VALUE,
             useCreateIndex: true,
             useNewUrlParser: true
         };
 
-        return mongoose.connect(mongoUri, options);
-    }
+        return await mongoose.connect(mongoUri, options);
+    })();
 
-    connect();
     mongoose.set('debug', true);
 
     models();
 
-    mongoose.connection.on('error', function (err: Error): void {
+    mongoose.connection.on('error', (err: Error): void => {
         console.error('Mongoose connection: error - ' + err);
     });
 
-    mongoose.connection.on('connected', function (): void {
+    mongoose.connection.on('connected', (): void => {
         console.info('Mongoose connection: connected');
     });
 
-    mongoose.connection.on('open', function (): void {
+    mongoose.connection.on('open', (): void => {
         console.info('Mongoose connection: open');
     });
 
-    mongoose.connection.on('reconnected', function (): void {
+    mongoose.connection.on('reconnected', (): void => {
         console.info('Mongoose connection: reconnected');
     });
 
-    mongoose.connection.on('disconnected', function (): void {
+    mongoose.connection.on('disconnected', (): void => {
         console.warn('Mongoose connection: disconnected');
     });
 
-    process.on('SIGINT', function (): void {
-        mongoose.disconnect(function () {
+    process.on('SIGINT', (): void => {
+        mongoose.disconnect(() => {
             process.exit(0);
         });
     });
 
-    process.on('SIGINT', function () {
-        mongoose.disconnect(function () {
+    process.on('SIGINT', () => {
+        mongoose.disconnect(() => {
             process.exit(0);
         });
     });
 
-    return mongoose;
-}
-
-export default mongoConnection();
+    return await mongoose;
+})();

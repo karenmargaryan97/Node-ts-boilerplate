@@ -1,30 +1,30 @@
 import { IUser } from '../../interfaces/models';
+import { Model, model, Schema } from 'mongoose';
 
-import * as mongoose from 'mongoose';
-const User: Model<IUser> = mongoose.model('User');
+const User: Model<IUser> = model('User');
 
 import { NOT_EXISTS } from '../configs/constants';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 import { AuthError } from '../errors';
-import { Model } from 'mongoose';
 
-export default (secret: string, passport: any) => {
-    passport.serializeUser((user, done) => {
+export default (secret: string, passport: any): void => {
+    passport.serializeUser((user: IUser, done: any): void => {
         done(null, user.id);
     });
-    passport.deserializeUser(async (id, done) => {
-        let user: IUser = await User.findById(id);
+
+    passport.deserializeUser(async (id: string | Schema.Types.ObjectId, done: any): Promise<any> => {
+        const user: IUser = await User.findById(id);
 
         user ? done(null, user) : done(new AuthError(NOT_EXISTS('User')), null);
     });
 
-    let jwtOptions = {
+    const jwtOptions: StrategyOptions = {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: secret
     };
 
-    let strategy: Strategy = new Strategy (jwtOptions, async (payload: IUser, next: any) => {
-        let user: IUser = await User.findById(payload.id);
+    const strategy: Strategy = new Strategy (jwtOptions, async (payload: IUser, next: any): Promise<void> => {
+        const user: IUser = await User.findById(payload.id);
 
         if (user) {
             next(null, user);
@@ -32,5 +32,6 @@ export default (secret: string, passport: any) => {
             next(new AuthError(NOT_EXISTS('User')), false);
         }
     });
+
     passport.use('user-rule', strategy);
 };

@@ -2,24 +2,24 @@ import { Router } from 'express';
 import authEndpoints from './endpoints';
 
 export default class AuthModule {
-    apiRouter: Router;
-    router: Router;
+    public readonly router: Router;
+    private apiRouter: Router;
 
     constructor(apiRouter: Router) {
         this.apiRouter = apiRouter;
         this.router = Router();
     }
 
-    createEndpoints() {
+    public createEndpoints(): void {
         this.assignRouter();
         this.assignEndpoints();
     }
 
-    assignRouter() {
+    public assignRouter(): void {
         this.apiRouter.use('/auth', this.router);
     }
 
-    assignEndpoints() {
+    public assignEndpoints(): void {
         authEndpoints(this.router);
     }
 }

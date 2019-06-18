@@ -17,9 +17,9 @@ import {
 } from '../configs/constants';
 
 export class AuthError extends Error {
-    status: number = UNAUTHORIZED_CODE;
-    message: string;
-    errors: Array<any>;
+    public message: string;
+    public errors: any[];
+    public status: number = UNAUTHORIZED_CODE;
 
     constructor(message: string, errors: any = null) {
         super();
@@ -29,9 +29,9 @@ export class AuthError extends Error {
 }
 
 export class BadRequest extends Error {
-    status: number = BAD_REQUEST_CODE;
-    message: string;
-    errors: Array<any>;
+    public status: number = BAD_REQUEST_CODE;
+    public message: string;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();
@@ -41,9 +41,9 @@ export class BadRequest extends Error {
 }
 
 export class UnsupportedMediaType extends Error {
-    status: number = UNSUPPORTED_MEDIA_TYPE_CODE;
-    message: string;
-    errors: Array<any>;
+    public status: number = UNSUPPORTED_MEDIA_TYPE_CODE;
+    public message: string;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();
@@ -53,9 +53,9 @@ export class UnsupportedMediaType extends Error {
 }
 
 export class Conflict extends Error {
-    status: number = CONFLICT_CODE;
-    message: string;
-    errors: Array<any>;
+    public status: number = CONFLICT_CODE;
+    public message: string;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();
@@ -65,9 +65,9 @@ export class Conflict extends Error {
 }
 
 export class NotFound extends Error {
-    status: number = NOT_FOUND_CODE;
-    message: string;
-    errors: Array<any>;
+    public status: number = NOT_FOUND_CODE;
+    public message: string;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();
@@ -77,9 +77,9 @@ export class NotFound extends Error {
 }
 
 export class Forbidden extends Error {
-    status: number = FORBIDDEN_CODE;
-    message: string = PERMISSION_DENIED;
-    errors: Array<any>;
+    public status: number = FORBIDDEN_CODE;
+    public message: string = PERMISSION_DENIED;
+    public errors: any[];
 
     constructor(errors: any = null) {
         super();
@@ -88,9 +88,9 @@ export class Forbidden extends Error {
 }
 
 export class Gone extends Error {
-    status: number = GONE_CODE;
-    message: string;
-    errors: Array<any>;
+    public status: number = GONE_CODE;
+    public message: string;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();
@@ -100,9 +100,9 @@ export class Gone extends Error {
 }
 
 export class ValidationError extends Error {
-    status: number = VALIDATION_ERROR_CODE;
-    message: string = VALIDATION_ERROR;
-    errors: Array<any>;
+    public status: number = VALIDATION_ERROR_CODE;
+    public message: string = VALIDATION_ERROR;
+    public errors: any[];
 
     constructor(errors: any) {
         super();
@@ -111,9 +111,9 @@ export class ValidationError extends Error {
 }
 
 export class ExternalApiError extends Error {
-    status: number = SERVICE_UNAVAILABLE_CODE;
-    message: string = SERVICE_UNAVAILABLE;
-    errors: Array<any>;
+    public status: number = SERVICE_UNAVAILABLE_CODE;
+    public message: string = SERVICE_UNAVAILABLE;
+    public errors: any[];
 
     constructor(errors: any) {
         super();
@@ -122,9 +122,9 @@ export class ExternalApiError extends Error {
 }
 
 export class ServiceUnavailable extends Error {
-    status: number = BAD_REQUEST_CODE;
-    message: string = SOMETHING_WENT_WRONG;
-    errors: Array<any>;
+    public status: number = BAD_REQUEST_CODE;
+    public message: string = SOMETHING_WENT_WRONG;
+    public errors: any[];
 
     constructor(message: string, errors: any = null) {
         super();

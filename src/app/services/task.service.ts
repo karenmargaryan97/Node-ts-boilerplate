@@ -6,14 +6,12 @@ import { NOT_EXISTS } from '../configs/constants';
 const Task: Model<ITask> = model('Task');
 
 export class TaskService {
-    constructor() { }
-
     public static async create(task: ITask): Promise<ITask> {
         return await Task.create(task);
     }
 
-    public static async getById(_id: String | Schema.Types.ObjectId): Promise<ITask> {
-        let task = await Task.findOne({ _id });
+    public static async getById(taskId: string | Schema.Types.ObjectId): Promise<ITask> {
+        const task: ITask = await Task.findOne({ _id: taskId });
 
         if (!task) {
             throw new NotFound(NOT_EXISTS('Task'));
@@ -26,9 +24,9 @@ export class TaskService {
         return await Task.find({ owner });
     }
 
-    public static async update(_id: String | Schema.Types.ObjectId, attributes: ITask): Promise<ITask> {
+    public static async update(taskId: ITask | Schema.Types.ObjectId, attributes: ITask): Promise<ITask> {
         const options: QueryFindOneAndUpdateOptions = { new: true };
 
-        return await Task.findByIdAndUpdate({ _id }, attributes, options);
+        return await Task.findByIdAndUpdate({ _id: taskId }, attributes, options);
     }
 }

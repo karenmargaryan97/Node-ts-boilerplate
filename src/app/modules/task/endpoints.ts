@@ -1,7 +1,7 @@
-import { TaskController } from './task.controller';
+import { Router } from 'express';
 import middlewares from '../../middlewares/index';
 import schemas from './schemas';
-import { Router } from  'express';
+import { TaskController } from './task.controller';
 
 export default (router: Router): void => {
     router.post('/', ...middlewares(schemas, 'save'), TaskController.create);

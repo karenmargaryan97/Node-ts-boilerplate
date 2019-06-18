@@ -2,8 +2,8 @@ import validator from './validator';
 import passport from './passport';
 import { USER_AUTH } from '../configs/constants';
 
-export default (schemas: object, actionName: string) => {
-    let middlewares = [];
+export default (schemas: any, actionName: string): any => {
+    const middlewares: any[] = [];
 
     if (!schemas[actionName]) {
         return middlewares;

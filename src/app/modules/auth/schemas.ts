@@ -3,25 +3,37 @@ import { INVALID, REQUIRED } from '../../configs/constants';
 export default {
     login: {
         validation: {
+            email: {
+                in: 'body',
+                isEmail: {
+                    errorMessage: INVALID('Email')
+                },
+                notEmpty: {
+                    errorMessage: REQUIRED('Email')
+                }
+            },
             password: {
                 in: 'body',
                 notEmpty: {
                     errorMessage: REQUIRED('Password')
                 }
-            },
-            email: {
-                in: 'body',
-                notEmpty: {
-                    errorMessage: REQUIRED('Email')
-                },
-                isEmail: {
-                    errorMessage: INVALID('Email')
-                }
             }
         }
     },
+    logout: {
+        authentication: true
+    },
     register: {
         validation: {
+            email: {
+                in: 'body',
+                isEmail: {
+                    errorMessage: INVALID('Email')
+                },
+                notEmpty: {
+                    errorMessage: REQUIRED('Email')
+                }
+            },
             fullName: {
                 in: 'body',
                 notEmpty: {
@@ -33,19 +45,7 @@ export default {
                 notEmpty: {
                     errorMessage: REQUIRED('Password')
                 }
-            },
-            email: {
-                in: 'body',
-                notEmpty: {
-                    errorMessage: REQUIRED('Email')
-                },
-                isEmail: {
-                    errorMessage: INVALID('Email')
-                }
             }
         }
-    },
-    logout: {
-        authentication: true
     }
-}
+};

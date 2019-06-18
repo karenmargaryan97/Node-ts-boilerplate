@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
 
-export interface Error {
+export interface IError {
     status?: number;
     message?: string;
-    errors?: Array<any>;
+    errors?: any;
 }
 
 export interface IJWTSignPayload {
@@ -13,4 +13,8 @@ export interface IJWTSignPayload {
 
 export interface IJWTPayload {
     token: string;
+}
+
+export interface IParams {
+    id: string;
 }

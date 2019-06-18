@@ -4,12 +4,6 @@ export default {
     save: {
         authentication: true,
         validation: {
-            title: {
-                in: 'body',
-                notEmpty: {
-                    errorMessage: REQUIRED('Title')
-                }
-            },
             content: {
                 in: 'body',
                 notEmpty: {
@@ -24,7 +18,13 @@ export default {
                 notEmpty: {
                     errorMessage: REQUIRED('Deadline')
                 }
-            }
+            },
+            title: {
+                in: 'body',
+                notEmpty: {
+                    errorMessage: REQUIRED('Title')
+                }
+            },
         }
     }
-}
+};

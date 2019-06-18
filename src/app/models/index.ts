@@ -1,7 +1,7 @@
-import User from './user';
 import Task from './task';
+import User from './user';
 
 export default function initModels(): void {
-    User();
     Task();
+    User();
 }

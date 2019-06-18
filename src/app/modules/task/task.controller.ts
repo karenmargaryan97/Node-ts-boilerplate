@@ -1,13 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
-import { TaskService } from '../../services';
-import { SUCCESS_CODE, CREATED_CODE, NO_CONTENT_CODE } from '../../configs/status-codes';
-import { BadRequest, NotFound } from '../../errors';
+import { NextFunction, Request, Response } from 'express';
 import { ITask, IUser } from '../../../interfaces/models';
+import { IParams } from '../../../interfaces/globals';
+import { CREATED_CODE, NO_CONTENT_CODE, SUCCESS_CODE } from '../../configs/status-codes';
+import { BadRequest, NotFound } from '../../errors';
+import { TaskService } from '../../services';
 
 export class TaskController {
 
-    public static async create(req: Request, res: Response, next: NextFunction) {
-        let payload: ITask = req.body;
+    public static async create(req: Request, res: Response, next: NextFunction): Promise<Response> {
+        const payload: ITask = req.body;
         const user: IUser = req.user;
         try {
             payload.owner = user._id;
@@ -19,9 +20,9 @@ export class TaskController {
         }
     }
 
-    public static async update(req: Request, res: Response, next: NextFunction) {
-        let payload: ITask = req.body;
-        const { id } = req.params;
+    public static async update(req: Request, res: Response, next: NextFunction): Promise<Response> {
+        const payload: ITask = req.body;
+        const { id }: IParams = req.params;
         try {
             const task: ITask = await TaskService.getById(id);
 
@@ -33,8 +34,8 @@ export class TaskController {
         }
     }
 
-    public static async getOne(req: Request, res: Response, next: NextFunction) {
-        const { id } = req.params;
+    public static async getOne(req: Request, res: Response, next: NextFunction): Promise<Response> {
+        const { id }: IParams = req.params;
         try {
             const task: ITask = await TaskService.getById(id);
 
@@ -44,7 +45,7 @@ export class TaskController {
         }
     }
 
-    public static async getAll(req: Request, res: Response, next: NextFunction) {
+    public static async getAll(req: Request, res: Response, next: NextFunction): Promise<Response> {
         const user: IUser = req.user;
         try {
             const tasks: ITask[] = await TaskService.getByOwner(user._id);

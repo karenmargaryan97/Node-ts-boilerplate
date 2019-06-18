@@ -2,24 +2,24 @@ import { Router } from 'express';
 import taskEndpoints from './endpoints';
 
 export default class TaskModule {
-    apiRouter;
-    router;
+    public apiRouter: Router;
+    public readonly router: Router;
 
-    constructor(apiRouter) {
+    constructor(apiRouter: Router) {
         this.apiRouter = apiRouter;
         this.router = Router();
     }
 
-    createEndpoints() {
+    public createEndpoints(): void {
         this.assignRouter();
         this.assignEndpoints();
     }
 
-    assignRouter() {
+    public assignRouter(): void {
         this.apiRouter.use('/tasks', this.router);
     }
 
-    assignEndpoints() {
+    public assignEndpoints(): void {
         taskEndpoints(this.router);
     }
 }

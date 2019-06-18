@@ -6,7 +6,7 @@ import { IJWTSignPayload, IJWTPayload } from '../../interfaces/globals';
 import { IUser } from '../../interfaces/models';
 
 export default class Utils {
-    static signJWTToken(user: IUser): IJWTPayload {
+    public static signJWTToken(user: IUser): IJWTPayload {
         const payload: IJWTSignPayload = { id: user._id, created_at: moment().toString() };
 
         const token: any = jwt.sign(payload, params.tokenSecret);
@@ -14,7 +14,7 @@ export default class Utils {
         return { token };
     }
 
-    static verifyJWTToken(token: string, secret: string = params.tokenSecret): any {
+    public static verifyJWTToken(token: string, secret: string = params.tokenSecret): any {
         try {
             return jwt.verify(token, secret);
         } catch (e) {
@@ -22,7 +22,7 @@ export default class Utils {
         }
     }
 
-    static getObjectIds(query: string): Array<ObjectID> {
+    public static getObjectIds(query: string): ObjectID[] {
         const objectIds: string[] = query.split(',');
 
         return objectIds.map((fundId: string) => {

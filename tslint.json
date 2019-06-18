@@ -30,7 +30,9 @@
     "no-duplicate-key": true,
     "no-empty": true,
     "new-parens": true,
+    "trailing-comma": false,
     "no-arg": true,
+    "ordered-imports": false,
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": false,
@@ -42,7 +44,7 @@
     "semicolon": true,
     "no-console": {
       "severity": "warning",
-      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+      "options": ["debug", "log", "time", "timeEnd", "trace"]
     }
   },
   "jsRules": {

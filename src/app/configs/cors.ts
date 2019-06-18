@@ -2,20 +2,20 @@ import params from './params';
 
 const corsOptions: any = {
     development: {
-        origin: /localhost:3000/,
-        credentials: true,
         allowedHeaders: [
             'Content-Type',
             'Authorization'
-        ]
+        ],
+        credentials: true,
+        origin: /localhost:3000/
     },
     production: {
-        origin: params.corsOrigins,
-        credentials: true,
         allowedHeaders: [
             'Content-Type',
             'Authorization'
-        ]
+        ],
+        credentials: true,
+        origin: params.corsOrigins
     }
 };
 

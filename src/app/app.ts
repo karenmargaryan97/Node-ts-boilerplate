@@ -1,25 +1,25 @@
-import * as express from 'express';
-import * as logger from 'morgan';
-import * as cors from 'cors';
-import * as helmet from 'helmet';
-import * as RateLimit from 'express-rate-limit';
 import { json, urlencoded } from 'body-parser';
 import * as cookieParser from 'cookie-parser';
-import * as passport from 'passport';
+import * as cors from 'cors';
+import * as express from 'express';
+import * as RateLimit from 'express-rate-limit';
 import * as expressValidator from 'express-validator';
+import * as helmet from 'helmet';
+import * as logger from 'morgan';
+import * as passport from 'passport';
 
 import corsOptions from './configs/cors';
-import configPassport from './strategies/passport-jwt';
-import errorHandler from './middlewares/errorHandler';
-import params from './configs/params';
 import limiter from './configs/limiter';
+import params from './configs/params';
+import errorHandler from './middlewares/errorHandler';
 import enableModules from './modules';
+import configPassport from './strategies/passport-jwt';
 import { isValidDate } from './validators';
 
 class Application {
-    private limiter: express.RequestHandler;
     public app: express.Application;
     public router: express.Router;
+    private limiter: express.RequestHandler;
 
     constructor() {
         this.app = express();
@@ -44,7 +44,7 @@ class Application {
         this.app.use(cors(corsOptions))
             .use(expressValidator({
                 customValidators: {
-                    isValidDate: isValidDate
+                    isValidDate
                 }
             }))
             .use(json({ limit: 52428800 }))
@@ -82,4 +82,4 @@ class Application {
     }
 }
 
-export default () => new Application().app;
+export default (): any => new Application().app;
