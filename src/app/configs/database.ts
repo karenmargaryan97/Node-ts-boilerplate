@@ -1,15 +1,13 @@
 import * as mongoose from 'mongoose';
-import {
-    mongoUri
-} from '../helpers/config';
+import { mongoUri } from '../helpers/config';
 import models from '../models';
 
 (async (): Promise<mongoose.Mongoose> => {
     (async (): Promise<mongoose.Mongoose> => {
         const timeout: number = 30 * 1000;
-        const options: object = {
+        const options: mongoose.ConnectionOptions = {
             connectTimeoutMS: timeout,
-            keepAlive: timeout,
+            keepAlive: true,
             reconnectInterval: 500,
             reconnectTries: Number.MAX_VALUE,
             useCreateIndex: true,
@@ -19,7 +17,9 @@ import models from '../models';
         return await mongoose.connect(mongoUri, options);
     })();
 
-    mongoose.set('debug', true);
+    if (process.env.NODE_ENV === 'development') {
+        mongoose.set('debug', true);
+    }
 
     models();
 
