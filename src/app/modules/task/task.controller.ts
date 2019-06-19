@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { ITask, IUser } from '../../../interfaces/models';
 import { IParams } from '../../../interfaces/globals';
 import { CREATED_CODE, NO_CONTENT_CODE, SUCCESS_CODE } from '../../configs/status-codes';
-import { BadRequest, NotFound } from '../../errors';
 import { TaskService } from '../../services';
 
 export class TaskController {
@@ -51,6 +50,19 @@ export class TaskController {
             const tasks: ITask[] = await TaskService.getByOwner(user._id);
 
             return res.status(SUCCESS_CODE).json(tasks);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    public static async delete(req: Request, res: Response, next: NextFunction): Promise<Response> {
+        const { id }: IParams = req.params;
+        try {
+            const task: ITask = await TaskService.getById(id);
+
+            await TaskService.delete(task._id);
+
+            return res.status(NO_CONTENT_CODE).json({ success: true });
         } catch (e) {
             next(e);
         }

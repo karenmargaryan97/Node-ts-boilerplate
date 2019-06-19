@@ -1,9 +1,10 @@
 import { ITask } from '../../interfaces/models';
 
 import { Schema, Model, model, QueryFindOneAndUpdateOptions } from 'mongoose';
+const Task: Model<ITask> = model('Task');
+
 import { NotFound } from '../errors';
 import { NOT_EXISTS } from '../configs/constants';
-const Task: Model<ITask> = model('Task');
 
 export class TaskService {
     public static async create(task: ITask): Promise<ITask> {
@@ -28,5 +29,9 @@ export class TaskService {
         const options: QueryFindOneAndUpdateOptions = { new: true };
 
         return await Task.findByIdAndUpdate({ _id: taskId }, attributes, options);
+    }
+
+    public static async delete(taskId: string | Schema.Types.ObjectId): Promise<ITask> {
+        return await Task.findOneAndDelete({ _id: taskId });
     }
 }
